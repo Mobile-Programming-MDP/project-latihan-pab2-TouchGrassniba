@@ -36,7 +36,7 @@ Movie.fromJson(e)).toList();
 Widget build(BuildContext context) {
 return Scaffold(
 appBar: AppBar(
-title: const Text('Pilem'),
+title: const Text('Film'),
 ),
 body: SingleChildScrollView(
 child: Column(
