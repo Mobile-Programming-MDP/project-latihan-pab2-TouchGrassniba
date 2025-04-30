@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fasum_app/screens/add_post_screen.dart';
 import 'package:fasum_app/screens/sign_in_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -26,8 +27,7 @@ class HomeScreen extends StatelessWidget {
   Future<void> signOut(BuildContext context) async {
     await FirebaseAuth.instance.signOut();
     Navigator.of(context).pushReplacement(
-      MaterialPageRoute(builder: (context) => const SignInScreen()),
-    );
+        MaterialPageRoute(builder: (context) => const SignInScreen()));
   }
 
   @override
@@ -42,15 +42,14 @@ class HomeScreen extends StatelessWidget {
               signOut(context);
             },
             icon: const Icon(Icons.logout),
-          ),
+          )
         ],
       ),
       body: StreamBuilder(
-        stream:
-            FirebaseFirestore.instance
-                .collection("posts")
-                .orderBy('createdAt', descending: true)
-                .snapshots(),
+        stream: FirebaseFirestore.instance
+            .collection("posts")
+            .orderBy('createdAt', descending: true)
+            .snapshots(),
         builder: (context, snapshot) {
           if (!snapshot.hasData)
             return const Center(child: CircularProgressIndicator());
@@ -78,20 +77,15 @@ class HomeScreen extends StatelessWidget {
                     if (imageBase64 != null)
                       ClipRRect(
                         borderRadius: const BorderRadius.vertical(
-                          top: Radius.circular(10),
-                        ),
-                        child: Image.memory(
-                          base64Decode(imageBase64),
-                          fit: BoxFit.cover,
-                          width: double.infinity,
-                          height: 200,
-                        ),
+                            top: Radius.circular(10)),
+                        child: Image.memory(base64Decode(imageBase64),
+                            fit: BoxFit.cover,
+                            width: double.infinity,
+                            height: 200),
                       ),
                     Padding(
                       padding: const EdgeInsets.symmetric(
-                        horizontal: 10,
-                        vertical: 10,
-                      ),
+                          horizontal: 10, vertical: 10),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -101,9 +95,7 @@ class HomeScreen extends StatelessWidget {
                               Text(
                                 formatTime(createdAt),
                                 style: const TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.grey,
-                                ),
+                                    fontSize: 12, color: Colors.grey),
                               ),
                               Text(
                                 fullName,
@@ -119,7 +111,7 @@ class HomeScreen extends StatelessWidget {
                           Text(
                             description ?? '',
                             style: const TextStyle(fontSize: 16),
-                          ),
+                          )
                         ],
                       ),
                     ),
@@ -131,7 +123,11 @@ class HomeScreen extends StatelessWidget {
         },
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).push(
+            MaterialPageRoute(builder: (context) => AddPostScreen()),
+          );
+        },
         child: const Icon(Icons.add),
       ),
     );
