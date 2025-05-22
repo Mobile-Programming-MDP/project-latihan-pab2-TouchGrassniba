@@ -1,5 +1,5 @@
-import 'package:fasum_app/screens/home_screen.dart';
-import 'package:fasum_app/screens/sign_up_screen.dart';
+import 'package:fasum/screens/home_screen.dart';
+import 'package:fasum/screens/sign_up_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
